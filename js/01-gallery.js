@@ -26,23 +26,28 @@ galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
 galleryContainer.addEventListener('click', galleryItemClick);
 
+let instance;
+
 function galleryItemClick(event) {
     const isGalleryLinkEl = event.target.classList.contains('gallery__image');
-    if (!isGalleryLinkEl) {
-        return;
-    }
-    event.preventDefault();
-
     const lightGalleryItem = event.target.dataset.source;
   
-    const instance = basicLightbox.create(
+  if (!isGalleryLinkEl) {
+      return  
+    }
+  event.preventDefault();
+
+  instance = basicLightbox.create(
         `<img src="${lightGalleryItem}" alt="${event.target.alt}">`
-    );
-    document.body.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') instance.close();
-    });
-  
+); 
   instance.show();
 };
 
-console.log(galleryItems);
+document.body.addEventListener('keydown', galleryItemClickEsc);
+
+function galleryItemClickEsc(event) {
+  
+    if (event.key === 'Escape' & instance !== 'undefined') {
+      instance.close();
+    }
+};
