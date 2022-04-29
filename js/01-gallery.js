@@ -34,20 +34,25 @@ function galleryItemClick(event) {
   
   if (!isGalleryLinkEl) {
       return  
-    }
+  };
   event.preventDefault();
-
   instance = basicLightbox.create(
-        `<img src="${lightGalleryItem}" alt="${event.target.alt}">`
-); 
+        `<img src="${lightGalleryItem}" alt="${event.target.alt}">`,
+  {
+    onShow: () => {
+      document.body.addEventListener('keydown', galleryItemClickEsc);
+    },
+      onClose: () => {
+        document.body.removeEventListener('keydown', galleryItemClickEsc);
+      },
+    });
+  
   instance.show();
 };
 
-document.body.addEventListener('keydown', galleryItemClickEsc);
-
 function galleryItemClickEsc(event) {
   
-    if (event.key === 'Escape' && instance) {
+    if (event.key === 'Escape') {
       instance.close();
-    }
+  };
 };
