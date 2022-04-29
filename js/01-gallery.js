@@ -47,7 +47,7 @@ document.body.addEventListener('keydown', galleryItemClickEsc);
 
 function galleryItemClickEsc(event) {
   
-    if (event.key === 'Escape' && instance !== 'undefined') {
+    if (event.key === 'Escape' && instance) {
       instance.close();
     }
 };
