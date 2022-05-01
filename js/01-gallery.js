@@ -42,7 +42,7 @@ function galleryItemClick(event) {
     onShow: () => {
       document.body.addEventListener('keydown', galleryItemClickEsc);
     },
-      onClose: () => {
+    onClose: () => {
         document.body.removeEventListener('keydown', galleryItemClickEsc);
       },
     });
